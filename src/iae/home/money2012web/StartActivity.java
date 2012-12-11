@@ -1,7 +1,5 @@
 package iae.home.money2012web;
 
-import org.acra.ACRA;
-
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Bundle;
@@ -13,6 +11,7 @@ import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
 
 public class StartActivity extends Activity {
 
@@ -45,9 +44,11 @@ public class StartActivity extends Activity {
 
         getWindow().requestFeature(Window.FEATURE_PROGRESS);
  	    getWindow().setFeatureInt( Window.FEATURE_PROGRESS, Window.PROGRESS_VISIBILITY_ON);
- 	   
-		mWebView=new WebView(this);
-		setContentView(mWebView,new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
+		setContentView(R.layout.start_activity);
+		 	   
+		mWebView=(WebView)findViewById(R.id.webview);
+		
 		mWebView.getSettings().setJavaScriptEnabled(true);
 		mWebView.setWebChromeClient(new WebChromeClient() {
 			   public void onProgressChanged(WebView view, int progress) {
@@ -62,7 +63,5 @@ public class StartActivity extends Activity {
 
 		mWebView.setWebViewClient(new MyWebViewClient());
 		mWebView.loadUrl("file:///android_asset/www/index.html");
-		
 	}
-
 }
