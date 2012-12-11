@@ -3,6 +3,7 @@ package iae.home.money2012web;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Bundle;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.util.Log;
 import android.view.ViewGroup.LayoutParams;
@@ -46,7 +47,8 @@ public class StartActivity extends Activity {
  	    getWindow().setFeatureInt( Window.FEATURE_PROGRESS, Window.PROGRESS_VISIBILITY_ON);
 
 		setContentView(R.layout.start_activity);
-		 	   
+		 	 
+		if(mWebView==null) {
 		mWebView=(WebView)findViewById(R.id.webview);
 		
 		mWebView.getSettings().setJavaScriptEnabled(true);
@@ -60,8 +62,31 @@ public class StartActivity extends Activity {
 		        	   activity.setTitle(R.string.app_name);
 			   }
 			 });
-
+		
 		mWebView.setWebViewClient(new MyWebViewClient());
+        if(android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+            fixJellyBeanIssues();
+        }
 		mWebView.loadUrl("file:///android_asset/www/index.html");
+		}
+		
+	    if (savedInstanceState != null)
+	        mWebView.restoreState(savedInstanceState);
+
 	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState ){
+		mWebView.saveState(outState);
+	}
+	
+    @TargetApi(16)
+    protected void fixJellyBeanIssues() {
+        try {
+            mWebView.getSettings().setAllowUniversalAccessFromFileURLs(true);
+        } catch(NullPointerException e) {
+            System.out.println(e.toString());
+        }
+    }
+
 }
