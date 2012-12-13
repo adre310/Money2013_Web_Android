@@ -149,6 +149,7 @@ public class JSONReportBuilder {
     }
 
     private static Object guessType(String value) {
+/*    	
         if (value.equalsIgnoreCase("true"))
             return true;
         if (value.equalsIgnoreCase("false"))
@@ -162,6 +163,7 @@ public class JSONReportBuilder {
                 // never mind
             }
         }
+*/        
         return value;
     }
 
