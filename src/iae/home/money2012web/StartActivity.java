@@ -1,5 +1,7 @@
 package iae.home.money2012web;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Bundle;
@@ -89,4 +91,17 @@ public class StartActivity extends Activity {
         }
     }
 
+    
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EasyTracker.getInstance().activityStart(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EasyTracker.getInstance().activityStop(this);
+    }
+    
 }
