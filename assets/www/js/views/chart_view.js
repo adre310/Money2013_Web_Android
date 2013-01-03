@@ -53,10 +53,10 @@ define(['jquery',
 				var self=this;
 			
 				$.ajax({
-					url : Routing.generate('rest_api_v2_post_charts'),
+					url : Routing.generate('rest_api_v3_post_charts'),
 					type: 'POST',
 					dataType: 'json',
-					data: JSON.stringify(this.model.toJSON()),
+					data: this.model.toJSON(),
 					success: function(data, textStatus, jqXHR) {
 						new GraphView({data:data});
 					}, 

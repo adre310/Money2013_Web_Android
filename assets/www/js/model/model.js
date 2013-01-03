@@ -39,7 +39,7 @@ define(['jquery',
 				if(method == 'create' || method == 'update') {
 					url=Routing.generate(this.updateUrl);
 				} else if(method=='delete') {
-					url=Routing.generate(this.deleteUrl);
+					url=Routing.generate(this.deleteUrl,{id:this.id});
 				}
 				
 			    var fn_success = options.success;
@@ -50,7 +50,7 @@ define(['jquery',
 					url : url,
 					type: 'POST',
 					dataType: 'json',
-					data: JSON.stringify(this.toJSON()),
+					data: this.toJSON(),
 					success: function(data, textStatus, jqXHR) {
 						//console.log('API.BaseModel sync success');
 						if(data.success) {
@@ -77,9 +77,9 @@ define(['jquery',
 	 * PAYS
 	 */
 	window.Pay=API.BaseModel.extend({
-		readUrl: 'rest_api_v2_get_pay',
-		updateUrl: 'rest_api_v2_post_pay_update',
-		deleteUrl: 'rest_api_v2_post_pay_delete',
+		readUrl: 'rest_api_v3_get_pay',
+		updateUrl: 'rest_api_v3_post_pay_update',
+		deleteUrl: 'rest_api_v3_post_pay_delete',
 		defaults: {
 			id: null,
 			notes: '',
@@ -100,7 +100,7 @@ define(['jquery',
 
 	window.PayList=Backbone.Collection.extend({
 		url: function() {
-			return Routing.generate('rest_api_v2_get_accounts_pays',{id:this.account_id});
+			return Routing.generate('rest_api_v3_get_accounts_pays',{id:this.account_id});
 		},
 		model: Pay
 	});
@@ -109,9 +109,9 @@ define(['jquery',
 	 * ACCOUNTS
 	 */
 	window.Account=API.BaseModel.extend({
-		readUrl: 'rest_api_v2_get_account',
-		updateUrl: 'rest_api_v2_post_account_update',
-		deleteUrl: 'rest_api_v2_post_account_delete',
+		readUrl: 'rest_api_v3_get_account',
+		updateUrl: 'rest_api_v3_post_account_update',
+		deleteUrl: 'rest_api_v3_post_account_delete',
 		
 		validation: {
 			name: {
@@ -133,7 +133,7 @@ define(['jquery',
 
 	window.AccountList=Backbone.Collection.extend({
 		url: function() {
-			return Routing.generate('rest_api_v2_get_accounts');
+			return Routing.generate('rest_api_v3_get_accounts');
 		},
 		model: Account
 	});
@@ -142,9 +142,9 @@ define(['jquery',
 	 * CATEGORY
 	 */
 	window.Category=API.BaseModel.extend({
-		readUrl: 'rest_api_v2_get_category',
-		updateUrl: 'rest_api_v2_post_category_update',
-		deleteUrl: 'rest_api_v2_post_category_delete',	
+		readUrl: 'rest_api_v3_get_category',
+		updateUrl: 'rest_api_v3_post_category_update',
+		deleteUrl: 'rest_api_v3_post_category_delete',	
 		validation: {
 			name: {
 				required: true
@@ -162,7 +162,7 @@ define(['jquery',
 
 	window.CategoriesList=Backbone.Collection.extend({
 		url: function() {
-			return Routing.generate('rest_api_v2_get_categories');
+			return Routing.generate('rest_api_v3_get_categories');
 		},
 		model: Category
 	});
@@ -178,7 +178,7 @@ define(['jquery',
 	
 	window.CurrencyCodesList=Backbone.Collection.extend({
 		url: function() {
-			return Routing.generate('rest_api_v2_get_currency_codes');
+			return Routing.generate('rest_api_v3_get_currency_codes');
 		},
 		model: CurrencyCode
 	});
@@ -195,9 +195,9 @@ define(['jquery',
 	
 	
 	window.Transfer=API.BaseModel.extend({
-		readUrl:   'rest_api_v2_post_transfer',
-		updateUrl: 'rest_api_v2_post_transfer',
-		deleteUrl: 'rest_api_v2_post_transfer',	
+		readUrl:   'rest_api_v3_post_transfer',
+		updateUrl: 'rest_api_v3_post_transfer',
+		deleteUrl: 'rest_api_v3_post_transfer',	
 
 		validation: {
 			value: [{
@@ -218,9 +218,9 @@ define(['jquery',
 	});
 	
 	window.Merge=API.BaseModel.extend({
-		readUrl:   'rest_api_v2_post_merge',
-		updateUrl: 'rest_api_v2_post_merge',
-		deleteUrl: 'rest_api_v2_post_merge',	
+		readUrl:   'rest_api_v3_post_merge',
+		updateUrl: 'rest_api_v3_post_merge',
+		deleteUrl: 'rest_api_v3_post_merge',	
 
 		defaults: {
 			id: null,
@@ -231,14 +231,14 @@ define(['jquery',
 	
 	window.ChartCollection=Backbone.Collection.extend({
 		url: function() {
-			return Routing.generate('rest_api_v2_get_charts');
+			return Routing.generate('rest_api_v3_get_charts');
 		},
 		model: CurrencyCode
 	});
 	
 	window.ChartModel=API.BaseModel.extend({
-		readUrl:   'rest_api_v2_get_charts',
-		updateUrl: 'rest_api_v2_post_charts',
-		deleteUrl: 'rest_api_v2_post_charts',	
+		readUrl:   'rest_api_v3_get_charts',
+		updateUrl: 'rest_api_v3_post_charts',
+		deleteUrl: 'rest_api_v3_post_charts',	
 	});
 });
